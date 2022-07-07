@@ -1,6 +1,8 @@
 package lambdasinaction.chap3;
 
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Lambdas {
 	public static void main(String ...args){
@@ -12,27 +14,32 @@ public class Lambdas {
 		// Filtering with lambdas
 		List<Apple> inventory = Arrays.asList(new Apple(80,"green"), new Apple(155, "green"), new Apple(120, "red"));
 
-		// [Apple{color='green', weight=80}, Apple{color='green', weight=155}]	
+		// [Apple{color='green', weight=80}, Apple{color='green', weight=155}]
 		List<Apple> greenApples = filter(inventory, (Apple a) -> "green".equals(a.getColor()));
 		System.out.println(greenApples);
 
 
 		Comparator<Apple> c = (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());
 
+		Comparator<Apple> c1 = (a1 ,a2) -> a1.getColor().compareTo(a2.getColor());
 		// [Apple{color='green', weight=80}, Apple{color='red', weight=120}, Apple{color='green', weight=155}]
 		inventory.sort(c);
 		System.out.println(inventory);
 	}
 
-	public static List<Apple> filter(List<Apple> inventory, ApplePredicate p){
-		List<Apple> result = new ArrayList<>();
-		for(Apple apple : inventory){
-			if(p.test(apple)){
-				result.add(apple);
-			}
-		}
-		return result;
-	}   
+	public static List<Apple> filter(List<Apple> list, Predicate<Apple> p){
+		return list.stream().filter(p).collect(Collectors.toList());
+	}
+
+	//public static List<Apple> filter(List<Apple> inventory, ApplePredicate p){
+	//	List<Apple> result = new ArrayList<>();
+	//	for(Apple apple : inventory){
+	//		if(p.test(apple)){
+	//			result.add(apple);
+	//		}
+	//	}
+	//	return result;
+	//}
 
 	public static class Apple {
 		private int weight = 0;

@@ -47,4 +47,19 @@ public class ParallelStreams {
             total += value;
         }
     }
+
+    public static void main(String[] args) {
+        Accumulator accumulator = new Accumulator();
+        Long t1 = System.nanoTime();
+        accumulator = new Accumulator();
+        LongStream.rangeClosed(1, Integer.MAX_VALUE).parallel().forEach(accumulator::add);
+        Long t2 = System.nanoTime();
+        System.out.println(t2 - t1 + ":" + accumulator.total);
+        Long t3 = System.nanoTime();
+        accumulator = new Accumulator();
+        LongStream.rangeClosed(1, Integer.MAX_VALUE).forEach(accumulator::add);
+        Long t4 = System.nanoTime();
+        System.out.println(t4 - t3 + ":" + accumulator.total);
+
+    }
 }

@@ -14,18 +14,18 @@ public class Mapping{
         List<String> dishNames = menu.stream()
                                      .map(Dish::getName)
                                      .collect(toList());
-        System.out.println(dishNames);
+        //System.out.println(dishNames);
 
         // map
         List<String> words = Arrays.asList("Hello", "World");
         List<Integer> wordLengths = words.stream()
                                          .map(String::length)
                                          .collect(toList());
-        System.out.println(wordLengths);
+        //System.out.println(wordLengths);
 
         // flatMap
         words.stream()
-                 .flatMap((String line) -> Arrays.stream(line.split("")))
+                 .flatMap(line -> Arrays.stream(line.split("")))
                  .distinct()
                  .forEach(System.out::println);
 

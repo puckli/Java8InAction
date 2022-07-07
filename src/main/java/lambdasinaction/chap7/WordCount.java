@@ -7,7 +7,7 @@ import java.util.stream.*;
 public class WordCount {
 
     public static final String SENTENCE =
-            " Nel   mezzo del cammin  di nostra  vita " +
+            "Nel   mezzo del cammin  di nostra  vita " +
             "mi  ritrovai in una  selva oscura" +
             " che la  dritta via era   smarrita ";
 
@@ -40,7 +40,7 @@ public class WordCount {
     }
 
     private static int countWords(Stream<Character> stream) {
-        WordCounter wordCounter = stream.reduce(new WordCounter(0, true),
+        WordCounter wordCounter = stream.reduce(new WordCounter(1, true),
                                                 WordCounter::accumulate,
                                                 WordCounter::combine);
         return wordCounter.getCounter();

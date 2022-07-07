@@ -32,10 +32,10 @@ public class DateTimeExamples {
     };
 
     public static void main(String[] args) {
-        useOldDate();
+        //useOldDate();
         useLocalDate();
-        useTemporalAdjuster();
-        useDateFormatter();
+        //useTemporalAdjuster();
+        //useDateFormatter();
     }
 
     private static void useOldDate() {
@@ -68,6 +68,7 @@ public class DateTimeExamples {
         int minute = time.getMinute(); // 45
         int second = time.getSecond(); // 20
         System.out.println(time);
+        System.out.println("=============");
 
         LocalDateTime dt1 = LocalDateTime.of(2014, Month.MARCH, 18, 13, 45, 20); // 2014-03-18T13:45
         LocalDateTime dt2 = LocalDateTime.of(date, time);
@@ -75,6 +76,8 @@ public class DateTimeExamples {
         LocalDateTime dt4 = date.atTime(time);
         LocalDateTime dt5 = time.atDate(date);
         System.out.println(dt1);
+        System.out.println(dt1.toLocalDate().atTime(LocalTime.MIN));
+        System.out.println(dt1.toLocalDate().atTime(LocalTime.MAX));
 
         LocalDate date1 = dt1.toLocalDate();
         System.out.println(date1);
@@ -97,7 +100,7 @@ public class DateTimeExamples {
     }
 
     private static void useTemporalAdjuster() {
-        LocalDate date = LocalDate.of(2014, 3, 18);
+        LocalDate date = LocalDate.of(2022, 6, 30);
         date = date.with(nextOrSame(DayOfWeek.SUNDAY));
         System.out.println(date);
         date = date.with(lastDayOfMonth());
